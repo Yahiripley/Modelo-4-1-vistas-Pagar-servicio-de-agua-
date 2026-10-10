@@ -1,0 +1,151 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "command": "finalize",
+  "status": "pass",
+  "type": "architecture",
+  "quality": "showcase",
+  "specification": {
+    "path": "C:\\Users\\omars\\.copilot\\repos\\copilot-worktrees\\Modelo-4-1-vistas-Pagar-servicio-de-agua-\\yahiripley-potential-doodle\\.archify\\architecture-pago-agua-20261009\\candidate.json",
+    "sha256": "2473758664969bd351b87000520cc0fb8a32efe36be4ec5211c035ec93310fb4",
+    "bytes": 6155
+  },
+  "artifact": {
+    "path": "C:\\Users\\omars\\.copilot\\repos\\copilot-worktrees\\Modelo-4-1-vistas-Pagar-servicio-de-agua-\\yahiripley-potential-doodle\\.archify\\architecture-pago-agua-20261009\\pago-servicio-agua.html",
+    "sha256": "6089f0518073846ee7819286dc33cc62cfd59c09494229b0fda218b8f6149e89",
+    "bytes": 769589
+  },
+  "gates": {
+    "validate": "pass",
+    "deliver": "pass",
+    "check": "pass",
+    "browser-check": "pass"
+  },
+  "diagnostics": [],
+  "diagnosticSummary": {
+    "total": 0,
+    "shown": 0,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "C:\\Users\\omars\\.copilot\\repos\\copilot-worktrees\\Modelo-4-1-vistas-Pagar-servicio-de-agua-\\yahiripley-potential-doodle\\.archify\\architecture-pago-agua-20261009\\pago-servicio-agua.finalize.json",
+    "summaryReceipt": "C:\\Users\\omars\\.copilot\\repos\\copilot-worktrees\\Modelo-4-1-vistas-Pagar-servicio-de-agua-\\yahiripley-potential-doodle\\.archify\\architecture-pago-agua-20261009\\pago-servicio-agua.finalize-summary.json",
+    "browserCheckReceipt": "C:\\Users\\omars\\.copilot\\repos\\copilot-worktrees\\Modelo-4-1-vistas-Pagar-servicio-de-agua-\\yahiripley-potential-doodle\\.archify\\architecture-pago-agua-20261009\\pago-servicio-agua.browser-check.json"
+  },
+  "update": {
+    "status": "current",
+    "installedVersion": "3.0.1",
+    "availableVersion": "3.0.1",
+    "releaseNotes": null,
+    "checkedAt": "2026-10-09T23:29:42.293Z",
+    "source": "cache",
+    "noticeRequired": false,
+    "noticeText": null
+  },
+  "visualReview": "not-requested",
+  "durationMs": 7151,
+  "visualReviewRecommendation": {
+    "action": "inspect-route-readability",
+    "signals": {
+      "resolvedCrossovers": 3,
+      "routesOverSuggestedBends": 1
+    },
+    "reason": "Automated gates passed, but crossings or detours still need perceptual review before claiming visual quality.",
+    "affectedRoutes": {
+      "crossings": [
+        {
+          "left": {
+            "id": "dominio-datos",
+            "from": "dominio",
+            "to": "datos",
+            "label": "lee y registra",
+            "collectionIndex": 3,
+            "artifactIndex": 4
+          },
+          "right": {
+            "id": "dominio-comercial",
+            "from": "dominio",
+            "to": "comercial",
+            "label": "consulta adeudo",
+            "collectionIndex": 5,
+            "artifactIndex": 6
+          },
+          "point": [
+            945,
+            255
+          ],
+          "sharedNode": "dominio"
+        },
+        {
+          "left": {
+            "id": "dominio-comprobante",
+            "from": "dominio",
+            "to": "comprobante",
+            "label": "genera folio",
+            "collectionIndex": 4,
+            "artifactIndex": 5
+          },
+          "right": {
+            "id": "pasarela-dominio",
+            "from": "pasarela",
+            "to": "dominio",
+            "label": "resultado",
+            "collectionIndex": 7,
+            "artifactIndex": 8
+          },
+          "point": [
+            945,
+            390
+          ],
+          "sharedNode": "dominio"
+        },
+        {
+          "left": {
+            "id": "pasarela-dominio",
+            "from": "pasarela",
+            "to": "dominio",
+            "label": "resultado",
+            "collectionIndex": 7,
+            "artifactIndex": 8
+          },
+          "right": {
+            "id": "dominio-notificaciones",
+            "from": "dominio",
+            "to": "notificaciones",
+            "label": "envía comprobante",
+            "collectionIndex": 8,
+            "artifactIndex": 9
+          },
+          "point": [
+            959,
+            390
+          ],
+          "sharedNode": "dominio"
+        }
+      ],
+      "detours": [
+        {
+          "relationship": {
+            "id": "dominio-comercial",
+            "from": "dominio",
+            "to": "comercial",
+            "label": "consulta adeudo",
+            "collectionIndex": 5,
+            "artifactIndex": 6
+          },
+          "bends": 3,
+          "stretch": 1
+        }
+      ],
+      "truncated": false
+    },
+    "hints": [
+      "dominio has 4 relationships facing its right side, which fits 3 ports: make that side at least 74px, or move some of those neighbours so they face another side of dominio.",
+      "dominio → datos and dominio → comercial cross next to dominio: move node datos or comercial so the two reach dominio from different sides (for example one level with it, one directly above or below it).",
+      "dominio → comprobante and pasarela → dominio cross next to dominio: move node comprobante or pasarela so the two reach dominio from different sides (for example one level with it, one directly above or below it).",
+      "pasarela → dominio and dominio → notificaciones cross next to dominio: move node pasarela or notificaciones so the two reach dominio from different sides (for example one level with it, one directly above or below it).",
+      "dominio → comercial needs 3 bends: move node dominio or comercial so they share a row or column with matching centers, or sit diagonally with a clear corner."
+    ],
+    "repair": "Trace these relationships at the desktop viewport. For Architecture, use references/architecture-layout-repair.md: reflow a blocked main path or tangled connected scene, and repair an isolated defect locally only when the surrounding composition is accepted. Preserve all semantic content and user-fixed geometry. Rerun finalize once after the edit."
+  }
+}

@@ -1,0 +1,154 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Arquitectura del sistema · Pago de servicio de agua",
+    "subtitle": "Vista integrada del modelo 4+1: usuario, dominio, persistencia e integraciones",
+    "output": ".archify/architecture-pago-agua-20261009/pago-servicio-agua.html",
+    "quality_profile": "showcase",
+    "repository": {
+      "url": "https://github.com/Yahiripley/Modelo-4-1-vistas-Pagar-servicio-de-agua-.git",
+      "provider": "github",
+      "link_mode": "web",
+      "revision": "26c6a1b159f260030c505b1154ff9a9322cfac19"
+    }
+  },
+  "components": [
+    {
+      "id": "cliente",
+      "type": "external",
+      "icon": "person",
+      "label": "Cliente",
+      "sublabel": "consulta y confirma",
+      "pos": [40, 300],
+      "size": [150, 66],
+      "sources": [{ "path": "docs/modelo-4-1/01-casos-de-uso/README.md", "line": 3, "end_line": 12, "label": "actor y objetivos" }]
+    },
+    {
+      "id": "portal",
+      "type": "frontend",
+      "label": "Portal de pago",
+      "sublabel": "vista y formulario",
+      "pos": [270, 300],
+      "size": [160, 66],
+      "sources": [{ "path": "docs/modelo-4-1/04-vista-desarrollo/README.md", "line": 8, "end_line": 10, "label": "vista y módulos" }]
+    },
+    {
+      "id": "api",
+      "type": "backend",
+      "label": "Servidor de aplicación",
+      "sublabel": "controlador y casos de uso",
+      "pos": [510, 300],
+      "size": [180, 66],
+      "sources": [{ "path": "docs/modelo-4-1/05-vista-fisica/README.md", "line": 8, "end_line": 12, "label": "servidor e integraciones" }]
+    },
+    {
+      "id": "dominio",
+      "type": "backend",
+      "label": "Servicios de dominio",
+      "sublabel": "cliente · consumo · adeudo · pago",
+      "tag": "núcleo",
+      "pos": [850, 300],
+      "size": [190, 66],
+      "sources": [{ "path": "docs/modelo-4-1/02-vista-logica/README.md", "line": 8, "end_line": 12, "label": "entidades y servicios" }]
+    },
+    {
+      "id": "datos",
+      "type": "database",
+      "label": "Base de datos",
+      "sublabel": "pagos y comprobantes",
+      "pos": [850, 120],
+      "size": [170, 66],
+      "sources": [{ "path": "docs/modelo-4-1/05-vista-fisica/README.md", "line": 8, "end_line": 12, "label": "persistencia" }]
+    },
+    {
+      "id": "comprobante",
+      "type": "database",
+      "label": "Comprobante",
+      "sublabel": "folio de operación",
+      "pos": [850, 500],
+      "size": [170, 66],
+      "sources": [{ "path": "docs/modelo-4-1/06-escenarios/README.md", "line": 8, "end_line": 11, "label": "resultado aprobado" }]
+    },
+    {
+      "id": "comercial",
+      "type": "cloud",
+      "label": "Sistema comercial de agua",
+      "sublabel": "clientes, consumo y adeudo",
+      "pos": [1050, 120],
+      "size": [190, 66],
+      "sources": [{ "path": "docs/modelo-4-1/05-vista-fisica/README.md", "line": 10, "end_line": 12, "label": "organismo de agua" }]
+    },
+    {
+      "id": "pasarela",
+      "type": "security",
+      "label": "Pasarela de pago",
+      "sublabel": "autorización bancaria",
+      "pos": [1050, 300],
+      "size": [180, 66],
+      "sources": [{ "path": "docs/modelo-4-1/05-vista-fisica/README.md", "line": 10, "end_line": 12, "label": "integración de pago" }]
+    },
+    {
+      "id": "notificaciones",
+      "type": "messagebus",
+      "label": "Servicio de notificaciones",
+      "sublabel": "correo o SMS",
+      "pos": [1050, 500],
+      "size": [190, 66],
+      "sources": [{ "path": "docs/modelo-4-1/03-vista-procesos/README.md", "line": 3, "end_line": 10, "label": "salida asíncrona" }]
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "Aplicación de pago",
+      "wraps": ["portal", "api", "dominio", "datos", "comprobante"]
+    },
+    {
+      "kind": "security-group",
+      "label": "Integraciones protegidas",
+      "wraps": ["comercial", "pasarela", "notificaciones"]
+    }
+  ],
+  "connections": [
+    { "id": "cliente-portal", "from": "cliente", "to": "portal", "label": "HTTPS", "variant": "emphasis" },
+    { "id": "portal-api", "from": "portal", "to": "api", "label": "solicita operación" },
+    { "id": "api-dominio", "from": "api", "to": "dominio", "label": "coordina caso de uso", "variant": "emphasis" },
+    { "id": "dominio-datos", "from": "dominio", "to": "datos", "label": "lee y registra", "fromSide": "top", "toSide": "bottom" },
+    { "id": "dominio-comprobante", "from": "dominio", "to": "comprobante", "label": "genera folio", "fromSide": "bottom", "toSide": "top" },
+    { "id": "dominio-comercial", "from": "dominio", "to": "comercial", "label": "consulta adeudo", "variant": "dashed" },
+    { "id": "dominio-pasarela", "from": "dominio", "to": "pasarela", "label": "solicita autorización", "variant": "security" },
+    { "id": "pasarela-dominio", "from": "pasarela", "to": "dominio", "label": "resultado", "variant": "dashed" },
+    { "id": "dominio-notificaciones", "from": "dominio", "to": "notificaciones", "label": "envía comprobante", "variant": "dashed" },
+    { "id": "dominio-portal", "from": "dominio", "to": "portal", "label": "estado y folio", "variant": "dashed" }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Recorrido principal",
+      "items": [
+        "El cliente inicia la consulta en el portal",
+        "El servidor coordina el caso de uso con los servicios de dominio",
+        "La autorización aprobada produce un folio"
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Núcleo lógico",
+      "items": [
+        "El dominio separa cliente, consumo, adeudo y pago",
+        "La base de datos conserva el resultado y el comprobante",
+        "Las reglas de estados viven en el proceso de pago"
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Límites externos",
+      "items": [
+        "El sistema comercial aporta cuenta, consumo y adeudo",
+        "La pasarela decide la autorización bancaria",
+        "La notificación puede ejecutarse de forma asíncrona"
+      ]
+    }
+  ]
+}

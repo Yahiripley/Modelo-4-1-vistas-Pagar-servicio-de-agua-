@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "receiptId": "c4b6e92c-6d47-4ae8-bf46-5fecb49e91da",
+  "status": "current",
+  "command": "deliver",
+  "type": "architecture",
+  "input": "C:\\Users\\omars\\.copilot\\repos\\copilot-worktrees\\Modelo-4-1-vistas-Pagar-servicio-de-agua-\\yahiripley-potential-doodle\\.archify\\architecture-pago-agua-20261009\\candidate.json",
+  "output": "C:\\Users\\omars\\.copilot\\repos\\copilot-worktrees\\Modelo-4-1-vistas-Pagar-servicio-de-agua-\\yahiripley-potential-doodle\\.archify\\architecture-pago-agua-20261009\\pago-servicio-agua.html",
+  "specification": {
+    "sha256": "2473758664969bd351b87000520cc0fb8a32efe36be4ec5211c035ec93310fb4",
+    "bytes": 6155
+  },
+  "artifact": {
+    "sha256": "6089f0518073846ee7819286dc33cc62cfd59c09494229b0fda218b8f6149e89",
+    "bytes": 769589
+  }
+}
